@@ -584,21 +584,73 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"2Ew96":[function(require,module,exports) {
-const React = {
-    createElement (type, props, ...children) {
-        const reactElement = {
-            type,
-            props: {
-                ...props,
-                children
-            }
-        };
-        return reactElement;
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var _react = require("./react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+function render(reactElement, rootElement) {
+    const { type, props } = reactElement;
+    function createDomElement(reactElement) {
+        const DomElement = document.createElement(type);
+        props.children.forEach((child)=>{
+            console.log(child);
+            const textNode = document.createTextNode(child);
+            DomElement.append(textNode);
+        });
+        return DomElement;
     }
-};
-const h1 = /*#__PURE__*/ React.createElement("h1", null, /*#__PURE__*/ React.createElement("p", null, "Hi"), /*#__PURE__*/ React.createElement("b", null, "Hello"));
-console.log(h1);
+    const DomElement = createDomElement(reactElement);
+    rootElement.append(DomElement);
+}
+const h1 = /*#__PURE__*/ (0, _reactDefault.default).createElement("h1", null, "Hello world");
+render(h1, document.querySelector("#root"));
 
-},{}]},["APLPM","2Ew96"], "2Ew96", "parcelRequire5c38")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react":"4ZG9e"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"4ZG9e":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function createElement(type, props, ...children) {
+    const reactElement = {
+        type,
+        props: {
+            ...props,
+            children
+        }
+    };
+    return reactElement;
+}
+exports.default = {
+    createElement
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["APLPM","2Ew96"], "2Ew96", "parcelRequire5c38")
 
 //# sourceMappingURL=index.7826abd7.js.map

@@ -1,21 +1,19 @@
-const React = {
-  createElement(type, props, ...children) {
-    const reactElement = {
-      type,
-      props: {
-        ...props,
-        children,
-      },
-    };
-    return reactElement;
-  },
-};
+import React from "./react";
 
-const h1 = (
-  <h1>
-    <p>Hi</p>
-    <b>Hello</b>
-  </h1>
-);
+function render(reactElement, rootElement) {
+  const { type, props } = reactElement;
+  function createDomElement(reactElement) {
+    const DomElement = document.createElement(type);
+    props.children.forEach((child) => {
+      console.log(child);
+      const textNode = document.createTextNode(child);
+      DomElement.append(textNode);
+    });
+    return DomElement;
+  }
+  const DomElement = createDomElement(reactElement);
+  rootElement.append(DomElement);
+}
+const h1 = <h1>Hello world</h1>;
 
-console.log(h1);
+render(h1, document.querySelector("#root"));
