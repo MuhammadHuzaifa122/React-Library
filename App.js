@@ -5,9 +5,12 @@ function render(reactElement, rootElement) {
   function createDomElement(reactElement) {
     const DomElement = document.createElement(type);
     props.children.forEach((child) => {
-      console.log(child);
-      const textNode = document.createTextNode(child);
-      DomElement.append(textNode);
+      if (typeof child === "string") {
+        const textNode = document.createTextNode(child);
+        DomElement.append(textNode);
+      } else {
+        DomElement.append(createDomElement(child));
+      }
     });
     return DomElement;
   }
