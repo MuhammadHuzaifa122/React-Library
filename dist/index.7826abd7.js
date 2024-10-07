@@ -587,25 +587,15 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _react = require("./react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-function render(reactElement, rootElement) {
-    const { type, props } = reactElement;
-    function createDomElement(reactElement) {
-        const DomElement = document.createElement(type);
-        props.children.forEach((child)=>{
-            if (typeof child === "string") {
-                const textNode = document.createTextNode(child);
-                DomElement.append(textNode);
-            } else DomElement.append(createDomElement(child));
-        });
-        return DomElement;
-    }
-    const DomElement = createDomElement(reactElement);
-    rootElement.append(DomElement);
-}
-const h1 = /*#__PURE__*/ (0, _reactDefault.default).createElement("h1", null, "Hello world");
-render(h1, document.querySelector("#root"));
+var _reactDom = require("./ReactDom");
+const h1 = /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
+    className: "container",
+    id: "app",
+    title: "hello"
+}, "Hello world");
+(0, _reactDom.render)(h1, document.querySelector("#root"));
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react":"4ZG9e"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react":"4ZG9e","./ReactDom":"4WFIo"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -650,6 +640,33 @@ function createElement(type, props, ...children) {
 }
 exports.default = {
     createElement
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4WFIo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "render", ()=>render);
+function render(reactElement, rootElement) {
+    const { type, props } = reactElement;
+    function createDomElement(reactElement) {
+        const DomElement = document.createElement(type);
+        console.log(props);
+        Object.entries(props).forEach(([key, value])=>{
+            DomElement[key] = value;
+        });
+        props.children.forEach((child)=>{
+            if (typeof child === "string") {
+                const textNode = document.createTextNode(child);
+                DomElement.append(textNode);
+            } else DomElement.append(createDomElement(child));
+        });
+        return DomElement;
+    }
+    const DomElement = createDomElement(reactElement);
+    rootElement.append(DomElement);
+}
+exports.default = {
+    render
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["APLPM","2Ew96"], "2Ew96", "parcelRequire5c38")
