@@ -1,7 +1,7 @@
 export function render(reactElement, rootElement) {
   function createDomElement(reactElement) {
     if (typeof reactElement.type === "function") {
-      return createDomElement(reactElement.type());
+      return createDomElement(reactElement.type(reactElement.props));
     }
 
     if (Array.isArray(reactElement)) {

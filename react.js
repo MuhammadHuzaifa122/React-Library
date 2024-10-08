@@ -3,9 +3,9 @@ function createElement(type, props, ...children) {
     type,
     props: {
       ...props,
-      children,
     },
   };
+  if (children.length) reactElement.props.children = children;
   return reactElement;
 }
 

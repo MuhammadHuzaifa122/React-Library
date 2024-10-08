@@ -7,7 +7,9 @@ import { render } from "./ReactDom";
 //   </div>
 // );
 
-function Card() {
+function Card(props) {
+  console.log(props);
+
   return (
     <div className="container" id="app" title="hello">
       Hello world
@@ -15,4 +17,4 @@ function Card() {
   );
 }
 
-render(<Card />, document.querySelector("#root"));
+render(<Card name={"Ali"} />, document.querySelector("#root"));

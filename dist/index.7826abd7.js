@@ -593,14 +593,17 @@ var _reactDom = require("./ReactDom");
 //     Hello world
 //   </div>
 // );
-function Card() {
+function Card(props) {
+    console.log(props);
     return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
         className: "container",
         id: "app",
         title: "hello"
     }, "Hello world");
 }
-(0, _reactDom.render)(/*#__PURE__*/ (0, _reactDefault.default).createElement(Card, null), document.querySelector("#root"));
+(0, _reactDom.render)(/*#__PURE__*/ (0, _reactDefault.default).createElement(Card, {
+    name: "Ali"
+}), document.querySelector("#root"));
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react":"4ZG9e","./ReactDom":"4WFIo"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -639,10 +642,10 @@ function createElement(type, props, ...children) {
     const reactElement = {
         type,
         props: {
-            ...props,
-            children
+            ...props
         }
     };
+    if (children.length) reactElement.props.children = children;
     return reactElement;
 }
 exports.default = {
@@ -655,7 +658,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "render", ()=>render);
 function render(reactElement, rootElement) {
     function createDomElement(reactElement) {
-        if (typeof reactElement.type === "function") return createDomElement(reactElement.type());
+        if (typeof reactElement.type === "function") return createDomElement(reactElement.type(reactElement.props));
         if (Array.isArray(reactElement)) return reactElement.map((el)=>createDomElement(el));
         if (typeof reactElement === "string") return document.createTextNode(reactElement);
         const { type, props } = reactElement;
