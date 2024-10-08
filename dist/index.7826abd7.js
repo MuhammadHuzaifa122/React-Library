@@ -588,17 +588,19 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _react = require("./react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactDom = require("./ReactDom");
-const div = /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
-    className: "container",
-    id: "app",
-    title: "hello"
-}, "Hello world");
-const div2 = /*#__PURE__*/ (0, _reactDefault.default).createElement("div", null, "Div 2");
-(0, _reactDom.render)([
-    div,
-    div2,
-    "Ali"
-], document.querySelector("#root"));
+// const div = (
+//   <div className="container" id="app" title="hello">
+//     Hello world
+//   </div>
+// );
+function Card() {
+    return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
+        className: "container",
+        id: "app",
+        title: "hello"
+    }, "Hello world");
+}
+(0, _reactDom.render)(/*#__PURE__*/ (0, _reactDefault.default).createElement(Card, null), document.querySelector("#root"));
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react":"4ZG9e","./ReactDom":"4WFIo"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -651,10 +653,9 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "render", ()=>render);
-var _reactJs = require("./react.js");
-var _reactJsDefault = parcelHelpers.interopDefault(_reactJs);
 function render(reactElement, rootElement) {
     function createDomElement(reactElement) {
+        if (typeof reactElement.type === "function") return createDomElement(reactElement.type());
         if (Array.isArray(reactElement)) return reactElement.map((el)=>createDomElement(el));
         if (typeof reactElement === "string") return document.createTextNode(reactElement);
         const { type, props } = reactElement;
@@ -678,6 +679,6 @@ exports.default = {
     render
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react.js":"4ZG9e"}]},["APLPM","2Ew96"], "2Ew96", "parcelRequire5c38")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["APLPM","2Ew96"], "2Ew96", "parcelRequire5c38")
 
 //# sourceMappingURL=index.7826abd7.js.map
