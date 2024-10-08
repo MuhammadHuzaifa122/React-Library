@@ -593,17 +593,15 @@ var _reactDom = require("./ReactDom");
 //     Hello world
 //   </div>
 // );
-function Card(props) {
-    console.log(props);
+function Card() {
     return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
-        className: "container",
-        id: "app",
-        title: "hello"
-    }, "Hello world");
+        className: "container"
+    }, [
+        "hi",
+        "Hello"
+    ]);
 }
-(0, _reactDom.render)(/*#__PURE__*/ (0, _reactDefault.default).createElement(Card, {
-    name: "Ali"
-}), document.querySelector("#root"));
+(0, _reactDom.render)(/*#__PURE__*/ (0, _reactDefault.default).createElement(Card, null), document.querySelector("#root"));
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react":"4ZG9e","./ReactDom":"4WFIo"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -667,7 +665,8 @@ function render(reactElement, rootElement) {
             DomElement[key] = value;
         });
         props.children.forEach((child)=>{
-            if (typeof child === "string") {
+            if (Array.isArray(child)) DomElement.append(...child.map((el)=>createDomElement(el)));
+            else if (typeof child === "string") {
                 const textNode = document.createTextNode(child);
                 DomElement.append(textNode);
             } else DomElement.append(createDomElement(child));

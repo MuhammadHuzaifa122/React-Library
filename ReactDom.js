@@ -18,7 +18,9 @@ export function render(reactElement, rootElement) {
       DomElement[key] = value;
     });
     props.children.forEach((child) => {
-      if (typeof child === "string") {
+      if (Array.isArray(child)) {
+        DomElement.append(...child.map((el) => createDomElement(el)));
+      } else if (typeof child === "string") {
         const textNode = document.createTextNode(child);
         DomElement.append(textNode);
       } else {
