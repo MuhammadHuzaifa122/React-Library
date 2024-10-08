@@ -596,7 +596,8 @@ const div = /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
 const div2 = /*#__PURE__*/ (0, _reactDefault.default).createElement("div", null, "Div 2");
 (0, _reactDom.render)([
     div,
-    div2
+    div2,
+    "Ali"
 ], document.querySelector("#root"));
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react":"4ZG9e","./ReactDom":"4WFIo"}],"gkKU3":[function(require,module,exports) {
@@ -655,6 +656,7 @@ var _reactJsDefault = parcelHelpers.interopDefault(_reactJs);
 function render(reactElement, rootElement) {
     function createDomElement(reactElement) {
         if (Array.isArray(reactElement)) return reactElement.map((el)=>createDomElement(el));
+        if (typeof reactElement === "string") return document.createTextNode(reactElement);
         const { type, props } = reactElement;
         const DomElement = document.createElement(type);
         Object.entries(props).forEach(([key, value])=>{

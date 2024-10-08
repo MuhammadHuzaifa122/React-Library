@@ -8,4 +8,4 @@ const div = (
 );
 
 const div2 = <div>Div 2</div>;
-render([div, div2], document.querySelector("#root"));
+render([div, div2, "Ali"], document.querySelector("#root"));

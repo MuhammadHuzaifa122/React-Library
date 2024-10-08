@@ -5,6 +5,10 @@ export function render(reactElement, rootElement) {
       return reactElement.map((el) => createDomElement(el));
     }
 
+    if (typeof reactElement === "string") {
+      return document.createTextNode(reactElement);
+    }
+
     const { type, props } = reactElement;
     const DomElement = document.createElement(type);
     Object.entries(props).forEach(([key, value]) => {
