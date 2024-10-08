@@ -1,10 +1,11 @@
 import React from "./react";
 import { render } from "./ReactDom";
 
-const h1 = (
+const div = (
   <div className="container" id="app" title="hello">
     Hello world
   </div>
 );
 
-render(h1, document.querySelector("#root"));
+const div2 = <div>Div 2</div>;
+render([div, div2], document.querySelector("#root"));

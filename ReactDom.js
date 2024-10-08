@@ -1,8 +1,12 @@
+import react from "./react.js";
 export function render(reactElement, rootElement) {
-  const { type, props } = reactElement;
   function createDomElement(reactElement) {
+    if (Array.isArray(reactElement)) {
+      return reactElement.map((el) => createDomElement(el));
+    }
+
+    const { type, props } = reactElement;
     const DomElement = document.createElement(type);
-    console.log(props);
     Object.entries(props).forEach(([key, value]) => {
       DomElement[key] = value;
     });
@@ -16,8 +20,13 @@ export function render(reactElement, rootElement) {
     });
     return DomElement;
   }
+
   const DomElement = createDomElement(reactElement);
-  rootElement.append(DomElement);
+  if (Array.isArray(DomElement)) {
+    rootElement.append(...DomElement);
+  } else {
+    rootElement.append(DomElement);
+  }
 }
 export default {
   render,
