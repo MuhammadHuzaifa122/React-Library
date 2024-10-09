@@ -1,14 +1,11 @@
-import React from "./react";
+import React from "./react.js";
 import { render } from "./ReactDom";
 
-// const div = (
-//   <div className="container" id="app" title="hello">
-//     Hello world
-//   </div>
-// );
-
-function Card() {
-  return <div className="container">{["hi", "Hello"]}</div>;
+export default function App() {
+  return (
+    <div className="App">
+      <h1 style={{ textAlign: "center", color: "green" }}>App</h1>
+    </div>
+  );
 }
-
-render(<Card />, document.querySelector("#root"));
+render(<App />, document.getElementById("root"));

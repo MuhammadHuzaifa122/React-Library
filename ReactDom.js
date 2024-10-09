@@ -14,19 +14,29 @@ export function render(reactElement, rootElement) {
 
     const { type, props } = reactElement;
     const DomElement = document.createElement(type);
-    Object.entries(props).forEach(([key, value]) => {
-      DomElement[key] = value;
-    });
-    props.children.forEach((child) => {
-      if (Array.isArray(child)) {
-        DomElement.append(...child.map((el) => createDomElement(el)));
-      } else if (typeof child === "string") {
-        const textNode = document.createTextNode(child);
-        DomElement.append(textNode);
-      } else {
-        DomElement.append(createDomElement(child));
-      }
-    });
+    if (props) {
+      Object.entries(props).forEach(([key, value]) => {
+        if (key === "style") {
+          Object.entries(value).forEach((style, value) => {
+            console.log(style, value);
+          });
+        } else {
+          DomElement[key] = value;
+        }
+      });
+
+      props.children?.forEach((child) => {
+        if (Array.isArray(child)) {
+          DomElement.append(...child.map((el) => createDomElement(el)));
+        } else if (typeof child === "string") {
+          const textNode = document.createTextNode(child);
+          DomElement.append(textNode);
+        } else {
+          const textNode = document.createTextNode(child);
+          DomElement.append(textNode);
+        }
+      });
+    }
     return DomElement;
   }
 
